@@ -4,10 +4,13 @@ class Oystercard
 
   MAXV = 90
   MINV = 1
+  MINF = 1
+  PENF = 6
 
   def initialize(balance = 0, _list_of_journeys)
     @balance = balance
     @list_of_journeys = []
+    @journey = Journey.new
   end
 
   def top_up(value)
@@ -24,8 +27,7 @@ class Oystercard
     deduct(fare)
     @entry_station = nil
     @exit_station = exit_station
-    journey = { entry_station => exit_station }
-    @list_of_journeys << journey
+    @list_of_journeys << @journey
   end
 
   def in_journey?
@@ -34,6 +36,12 @@ class Oystercard
     else
       false
     end
+  end
+
+  def fare
+    f = MINF
+    return f if !@entry_station | !@exit_station
+    return PENF
   end
 
   private

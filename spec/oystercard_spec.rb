@@ -27,7 +27,7 @@ describe Oystercard do
   end
 
   it 'deducts fare from balance' do
-    dv = 3
+    dv = 2
     subject.send(:deduct, dv)
     expect(subject.balance).to eq 0
   end
@@ -61,4 +61,11 @@ describe Oystercard do
     subject.touch_in(:station)
     expect(subject.list_of_journeys).not_to be nil
   end
+
+  it 'checks whether to assign penalty_fare' do
+    subject.touch_in(:station)
+    a = subject.fare
+    expect(a).to eq(fare)
+  end
+
 end
