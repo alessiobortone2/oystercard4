@@ -20,13 +20,19 @@ describe Oystercard do
 
   it 'fails if new balance lower than min' do
     subject.send(:deduct, dv)
-    expect { subject.touch_in(:station) }.to raise_error 'Bal lower than #{MINV}'
+    expect { subject.touch_in(:station) }.to raise_error 'Bal. < than #{MINV}'
   end
 
   it 'deducts fare from balance' do
     subject.send(:deduct, dv)
     expect(subject.balance).to eq 0
   end
+end
+
+describe Oystercard do
+  let(:station) { double :station }
+  dv = 1
+  subject(:Oystercard) { described_class.new(dv) }
 
   it 'can be touched in' do
     subject.touch_in(:station)

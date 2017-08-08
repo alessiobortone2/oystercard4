@@ -15,19 +15,21 @@ class Oystercard
   end
 
   def touch_in(entry_station)
-    raise 'New balance lower than #{MINV}' if balance < MINV
-    @in_use = true
+    raise 'Bal. < than #{MINV}' if balance < MINV
     @entry_station = entry_station
   end
 
   def touch_out(fare)
-    @in_use = false
     deduct(fare)
     @entry_station = nil
   end
 
   def in_journey?
-    @in_use
+    if @entry_station
+      return true
+    else
+      return false
+    end 
   end
 
   private
@@ -35,5 +37,4 @@ class Oystercard
   def deduct(fare)
     @balance -= fare
   end
-
 end
