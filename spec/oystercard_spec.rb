@@ -59,6 +59,6 @@ describe Oystercard do
 
   it 'checks that touch in/out creates a new journey' do
     subject.touch_in(:station)
-    expect(subject.list_of_journeys).not_to be nil  
+    expect(subject.list_of_journeys).not_to be nil
   end
 end

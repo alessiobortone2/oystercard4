@@ -24,7 +24,6 @@ class Oystercard
     deduct(fare)
     @entry_station = nil
     @exit_station = exit_station
-    journey = {}
     journey = { entry_station => exit_station }
     @list_of_journeys << journey
   end
