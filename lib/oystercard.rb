@@ -1,12 +1,13 @@
 # creates an Oyster class
 class Oystercard
-  attr_reader :balance, :entry_station
+  attr_reader :balance, :entry_station, :list_of_journeys
 
   MAXV = 90
   MINV = 1
 
-  def initialize(balance = 0)
+  def initialize(balance = 0, _list_of_journeys)
     @balance = balance
+    @list_of_journeys = []
   end
 
   def top_up(value)
@@ -15,21 +16,25 @@ class Oystercard
   end
 
   def touch_in(entry_station)
-    raise 'Bal. < than #{MINV}' if balance < MINV
+    raise 'Bal. < than #{MINV}' if balance <= MINV
     @entry_station = entry_station
   end
 
-  def touch_out(fare)
+  def touch_out(fare, exit_station)
     deduct(fare)
     @entry_station = nil
+    @exit_station = exit_station
+    journey = {}
+    journey = { entry_station => exit_station }
+    @list_of_journeys << journey
   end
 
   def in_journey?
     if @entry_station
-      return true
+      true
     else
-      return false
-    end 
+      false
+    end
   end
 
   private
