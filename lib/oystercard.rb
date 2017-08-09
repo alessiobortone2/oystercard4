@@ -41,7 +41,7 @@ class Oystercard
   def fare
     f = MINF
     return f if !@entry_station | !@exit_station
-    return PENF
+    PENF
   end
 
   private

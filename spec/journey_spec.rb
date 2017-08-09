@@ -1,9 +1,6 @@
 require 'journey.rb'
 
 describe Journey do
-
-  it '' do 
-
+  it '' do
   end
-
 end

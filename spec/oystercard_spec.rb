@@ -67,5 +67,4 @@ describe Oystercard do
     a = subject.fare
     expect(a).to eq(fare)
   end
-
 end
