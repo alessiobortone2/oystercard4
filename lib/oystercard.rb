@@ -1,15 +1,15 @@
 # creates an Oyster class
 class Oystercard
-  attr_reader :balance, :entry_station, :list_of_journeys
+  attr_reader :balance, :entry_station, :list_journeys
 
   MAXV = 90
   MINV = 1
   MINF = 1
   PENF = 6
 
-  def initialize(balance = 0, _list_of_journeys)
+  def initialize(balance = 0, list_journeys = nil)
     @balance = balance
-    @list_of_journeys = []
+    @list_journeys = []
     @journey = Journey.new
   end
 
@@ -27,15 +27,11 @@ class Oystercard
     deduct(fare)
     @entry_station = nil
     @exit_station = exit_station
-    @list_of_journeys << @journey
+    @list_journeys << { en: @journey.entry_station, ex: @journey.exit_station }
   end
 
   def in_journey?
-    if @entry_station
-      true
-    else
-      false
-    end
+    !@entry_station.nil?
   end
 
   def fare

@@ -1,3 +1,4 @@
+# in lib/station.rb
 class Station
   attr_reader :name, :zone
 

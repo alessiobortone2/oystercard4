@@ -1,5 +1,7 @@
 require 'oystercard.rb'
 
+# rubocop:disable Metrics/BlockLength
+
 describe Oystercard do
   let(:station) { double :station }
   dv = 0
@@ -54,12 +56,12 @@ describe Oystercard do
   end
 
   it 'checks that a new Oystercard has an empty list of journeys' do
-    expect(subject.list_of_journeys).to eq []
+    expect(subject.list_journeys).to eq []
   end
 
   it 'checks that touch in/out creates a new journey' do
     subject.touch_in(:station)
-    expect(subject.list_of_journeys).not_to be nil
+    expect(subject.list_journeys).not_to be nil
   end
 
   it 'checks whether to assign penalty_fare' do
