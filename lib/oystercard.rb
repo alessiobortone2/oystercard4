@@ -1,4 +1,5 @@
 # creates an Oyster class
+
 require './journeylog.rb'
 require '.journey.rb'
 
