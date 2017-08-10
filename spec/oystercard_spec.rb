@@ -1,12 +1,10 @@
 require 'oystercard.rb'
-
 # rubocop:disable Metrics/BlockLength
 
 describe Oystercard do
   let(:station) { double :station }
   dv = 0
   loj = nil # list of journeys
-  fare = 1
   subject(:Oystercard) { described_class.new(dv, loj) }
 
   it 'check newly initialized card has a default balance of 0' do
@@ -24,7 +22,7 @@ describe Oystercard do
 
   it 'fails if new balance lower than min' do
     dv = 1
-    subject.send(:deduct, fare)
+    subject.send(:deduct, MINF)
     expect { subject.touch_in(:station) }.to raise_error 'Bal. < than #{MINV}'
   end
 
@@ -67,6 +65,6 @@ describe Oystercard do
   it 'checks whether to assign penalty_fare' do
     subject.touch_in(:station)
     a = subject.fare
-    expect(a).to eq(fare)
+    expect(a).to eq(PENF)
   end
 end

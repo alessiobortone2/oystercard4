@@ -1,11 +1,14 @@
 # creates an Oyster class
+require './journeylog.rb'
+require '.journey.rb'
+
+MAXV = 90
+MINV = 1
+MINF = 1
+PENF = 6
+
 class Oystercard
   attr_reader :balance, :entry_station, :list_journeys
-
-  MAXV = 90
-  MINV = 1
-  MINF = 1
-  PENF = 6
 
   def initialize(balance = 0, list_journeys = nil)
     @balance = balance
@@ -24,10 +27,10 @@ class Oystercard
   end
 
   def touch_out(fare, exit_station)
-    deduct(fare)
-    @entry_station = nil
     @exit_station = exit_station
+    deduct(fare)
     @list_journeys << { en: @journey.entry_station, ex: @journey.exit_station }
+    @entry_station = nil
   end
 
   def in_journey?
@@ -35,9 +38,8 @@ class Oystercard
   end
 
   def fare
-    f = MINF
-    return f if !@entry_station | !@exit_station
-    PENF
+    return PENF if !@entry_station | !@exit_station
+    MINF
   end
 
   private
